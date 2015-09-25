@@ -52,11 +52,72 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _hello = __webpack_require__(157);
+	var data = [{ name: "Matthew Yang", desc: "Built this project to learn ReactJS" }, { name: "Pete Hunt", desc: "A very Pete-ish guy." }, { name: "Jordan Walke", desc: "Jordan likes walking." }];
 
-	var _hello2 = _interopRequireDefault(_hello);
+	var InputForm = _react2["default"].createClass({
+		displayName: "InputForm",
 
-	_react2["default"].render(_react2["default"].createElement(_hello2["default"], { name: "World" }), document.getElementById('app'));
+		handleSubmit: function handleSubmit(e) {
+			e.preventDefault();
+			var name = _react2["default"].findDOMNode(this.refs.name).value.trim();
+			var desc = _react2["default"].findDOMNode(this.refs.desc).value.trim();
+
+			// TODO: send request to the server
+			_react2["default"].findDOMNode(this.refs.author).value = '';
+			_react2["default"].findDOMNode(this.refs.text).value = '';
+		},
+		render: function render() {
+			return _react2["default"].createElement(
+				"form",
+				{ className: "inputForm", onSubmit: this.handleSubmit },
+				_react2["default"].createElement("input", { type: "text", placeholder: "Name", ref: "name" }),
+				_react2["default"].createElement("input", { type: "text", placeholder: "Description", ref: "desc" }),
+				_react2["default"].createElement("input", { type: "submit", value: "Submit!" })
+			);
+		}
+	});
+
+	var Person = _react2["default"].createClass({
+		displayName: "Person",
+
+		render: function render() {
+			return _react2["default"].createElement(
+				"div",
+				{ className: "person" },
+				_react2["default"].createElement(
+					"h2",
+					null,
+					this.props.name
+				),
+				_react2["default"].createElement(
+					"p",
+					null,
+					this.props.desc
+				)
+			);
+		}
+	});
+
+	var Hello = _react2["default"].createClass({
+		displayName: "Hello",
+
+		getInitialState: function getInitialState() {
+			return { data: this.props.input };
+		},
+		render: function render() {
+			var people = this.state.data.map(function (person) {
+				return _react2["default"].createElement(Person, { key: person.id, name: person.name, desc: person.desc });
+			});
+			return _react2["default"].createElement(
+				"div",
+				{ className: "hello" },
+				people,
+				_react2["default"].createElement(InputForm, null)
+			);
+		}
+	});
+
+	_react2["default"].render(_react2["default"].createElement(Hello, { input: data }), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -20433,71 +20494,6 @@
 	module.exports = onlyChild;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 157 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _description = __webpack_require__(158);
-
-	var _description2 = _interopRequireDefault(_description);
-
-	exports["default"] = _react2["default"].createClass({
-	  displayName: "hello",
-
-	  render: function render() {
-	    return _react2["default"].createElement(
-	      "div",
-	      { className: "hello" },
-	      "Hello, ",
-	      this.props.name,
-	      "!",
-	      _react2["default"].createElement(_description2["default"], null)
-	    );
-	  }
-	});
-	module.exports = exports["default"];
-
-/***/ },
-/* 158 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	exports["default"] = _react2["default"].createClass({
-		displayName: "description",
-
-		render: function render() {
-			return _react2["default"].createElement(
-				"div",
-				null,
-				"This is a sample react project"
-			);
-		}
-	});
-	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);
