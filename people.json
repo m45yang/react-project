@@ -1,26 +1,8 @@
 [
     {
-        "name": "Matthew Yang",
-        "desc": "Built this project to learn ReactJS"
-    },
-    {
-        "name": "Pete Hunt",
-        "desc": "A very Pete-ish guy."
-    },
-    {
-        "name": "Jordan Walke",
-        "desc": "Jordan likes walking."
-    },
-    {
-        "name": "Linda Chen",
-        "desc": "Loves food."
-    },
-    {
-        "name": "Zoe Song",
-        "desc": "Hates the cold"
-    },
-    {
-        "name": "Regan Johnson",
-        "desc": "The Boss."
+        "name": "Matthew",
+        "desc": "Built this to learn ReactJS",
+        "lat": "43.662881",
+        "lon": "-79.395224"
     }
 ]
