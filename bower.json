@@ -1,0 +1,19 @@
+{
+  "name": "react-project",
+  "version": "0.0.0",
+  "homepage": "https://github.com/m45yang/react-project",
+  "authors": [
+    "Matthew Yang <matthew.yang@canadastays.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gmaps": "~0.4.19"
+  }
+}

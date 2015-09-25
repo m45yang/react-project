@@ -4,5 +4,11 @@
         "desc": "Built this to learn ReactJS",
         "lat": "43.662881",
         "lon": "-79.395224"
+    },
+    {
+        "name": "Tim Wang",
+        "desc": "Nobody knows what he is doing",
+        "lat": "",
+        "lon": ""
     }
 ]

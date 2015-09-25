@@ -7,7 +7,10 @@ var Map = React.createClass({
         };
     },
     getInitialState: function() {
-    	return {map: []};
+    	return {
+    		map: [],
+    		data: []
+    	};
     },
     componentDidMount: function (rootNode) {
         var mapOptions = {
