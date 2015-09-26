@@ -19,28 +19,30 @@ var app = express();
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'node_modules')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
 app.get('/people.json', function(req, res) {
-  fs.readFile('people.json', function(err, data) {
-    res.setHeader('Cache-Control', 'no-cache');
-    res.json(JSON.parse(data));
-  });
+	fs.readFile('people.json', function(err, data) {
+		res.setHeader('Cache-Control', 'no-cache');
+		res.json(JSON.parse(data));
+	});
 });
 
 app.post('/people.json', function(req, res) {
-  fs.readFile('people.json', function(err, data) {
-    var comments = JSON.parse(data);
-    comments.push(req.body);
-    fs.writeFile('people.json', JSON.stringify(comments, null, 4), function(err) {
-      res.setHeader('Cache-Control', 'no-cache');
-      res.json(comments);
-    });
-  });
+	fs.readFile('people.json', function(err, data) {
+		var comments = JSON.parse(data);
+		comments.push(req.body);
+		fs.writeFile('people.json', JSON.stringify(comments, null, 4), function(err) {
+			res.setHeader('Cache-Control', 'no-cache');
+			res.json(comments);
+		});
+	});
 });
 
 
 app.listen(app.get('port'), function() {
-  console.log('Server started: http://localhost:' + app.get('port') + '/');
+	console.log('Server started: http://localhost:' + app.get('port') + '/');
 });

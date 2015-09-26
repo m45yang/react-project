@@ -1,9 +1,21 @@
-React.render(
-	<People url="/people.json" timeInterval={2000}/>,
-	document.getElementById('app')
-);
+var App = React.createClass({
+	render: function () {
+		return (
+			<div className="app">
+				<div className="row">
+					<div className="col-lg-3">
+						<People url="/people.json" timeInterval={20000} />
+					</div>
+					<div className="col-lg-9">
+						<Map />
+					</div>
+				</div>
+			</div>
+		);
+	}
+});
 
 React.render(
-	<Map />,
-	document.getElementById('map')
+	<App />,
+	document.getElementById('main')
 );
