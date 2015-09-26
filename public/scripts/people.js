@@ -4,14 +4,14 @@ var InputForm = React.createClass({
 		var name = React.findDOMNode(this.refs.name).value.trim();
 		var desc = React.findDOMNode(this.refs.desc).value.trim();
 		var lat = React.findDOMNode(this.refs.lat).value.trim();
-		var lon = React.findDOMNode(this.refs.lon).value.trim();
+		var lng = React.findDOMNode(this.refs.lng).value.trim();
 
-		this.props.onPersonSubmit({name: name, desc: desc, lat: lat, lon: lon});
+		this.props.onPersonSubmit({name: name, desc: desc, lat: lat, lng: lng});
 
 		React.findDOMNode(this.refs.name).value = '';
 		React.findDOMNode(this.refs.desc).value = '';
 		React.findDOMNode(this.refs.lat).value = '';
-		React.findDOMNode(this.refs.lon).value = '';
+		React.findDOMNode(this.refs.lng).value = '';
 	},
 	render: function() {
 		return (
@@ -19,7 +19,7 @@ var InputForm = React.createClass({
 				<input type="text" placeholder="Name" ref="name" />
 				<input type="text" placeholder="Description" ref="desc" />
 				<input type="text" placeholder="Latitude" ref="lat" />
-				<input type="text" placeholder="Longtitude" ref="lon" />
+				<input type="text" placeholder="Longtitude" ref="lng" />
 				<input type="submit" value="Submit!" />
 			</form>
 		)
@@ -33,7 +33,7 @@ var Person = React.createClass({
 				<h2>{ this.props.name }</h2>
 				<p>{ this.props.desc }</p>
 				<p>Latitude: { this.props.lat }</p>
-				<p>Longtitude: { this.props.lon }</p>
+				<p>Longtitude: { this.props.lng }</p>
 				<hr/>
 			</div>
 		)
@@ -78,7 +78,7 @@ var People = React.createClass({
 	render: function() {
 		var personList = this.state.data.map(function (person) {
 			return (
-				<Person key={ person.id } name={ person.name } desc={ person.desc } lat={ person.lat } lon={ person.lon }/>
+				<Person key={ person.id } name={ person.name } desc={ person.desc } lat={ person.lat } lng={ person.lng }/>
 			)
 		});
 		return (
