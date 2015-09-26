@@ -8,13 +8,13 @@
     {
         "name": "Tim Wang",
         "desc": "Nobody knows what he is doing",
-        "lat": "",
-        "lng": ""
+        "lat": "48.123",
+        "lng": "2.222"
     },
     {
         "name": "Linda Chen",
-        "desc": "Is an eggslut",
-        "lat": "48",
-        "lng": "2"
+        "desc": "Is an egg slut",
+        "lat": "48.9132",
+        "lng": "2.543"
     }
 ]
