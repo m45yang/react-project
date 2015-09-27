@@ -14,7 +14,6 @@ var Person = React.createClass({
 
 var People = React.createClass({
 	render: function() {
-		console.log(this.props.data);
 		var personList = this.props.data.map(function (person) {
 			return (
 				<Person key={ person.id } name={ person.name } desc={ person.desc } lat={ person.lat } lng={ person.lng }/>
