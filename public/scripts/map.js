@@ -7,21 +7,9 @@ var Map = React.createClass({
 		    streetViewControl: false
 		};
 		var gmap = new google.maps.Map( document.getElementById('map'), mapOptions );
-		var newBounds;
 
 		// get the current bounds of the map after tiles loaded
-		google.maps.event.addListenerOnce(gmap, 'tilesloaded', function(evt) {
-			console.log('here');
-			var bounds = {
-				sw_lat : gmap.getBounds().getSouthWest().lat(),
-				sw_lng : gmap.getBounds().getSouthWest().lng(),
-				ne_lat : gmap.getBounds().getNorthEast().lat(),
-				ne_lng : gmap.getBounds().getNorthEast().lng()
-			};
-			console.log(bounds);
-		});
-
-		console.log(newBounds);
+		google.maps.event.addListenerOnce(gmap, 'bounds_changed', this.init());
 
 		this.setState({ gmap : gmap });
 	},
@@ -46,14 +34,14 @@ var Map = React.createClass({
 			});
 		}
 	},
-	// set current bounds of map
-	set_bounds: function() {
-		var map = this.state.gmap;
+	// init map and map boundaries
+	init: function(gmap) {
+		console.log(gmap.getBounds());
 		this.setState({ bounds: {
-			sw_lat : map.getBounds().getSouthWest().lat(),
-			sw_lng : map.getBounds().getSouthWest().lng(),
-			ne_lat : map.getBounds().getNorthEast().lat(),
-			ne_lng : map.getBounds().getNorthEast().lng()
+			sw_lat : gmap.getBounds().getSouthWest().lat(),
+			sw_lng : gmap.getBounds().getSouthWest().lng(),
+			ne_lat : gmap.getBounds().getNorthEast().lat(),
+			ne_lng : gmap.getBounds().getNorthEast().lng()
 		}});
 		console.log(this.bounds);
 	},
