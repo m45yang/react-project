@@ -7,6 +7,7 @@ var Map = React.createClass({
 		    streetViewControl: false
 		};
 		var gmap = new google.maps.Map( document.getElementById('map'), mapOptions );
+		var newBounds;
 
 		// get the current bounds of the map after tiles loaded
 		google.maps.event.addListenerOnce(gmap, 'tilesloaded', function(evt) {
@@ -19,6 +20,8 @@ var Map = React.createClass({
 			};
 			console.log(bounds);
 		});
+
+		console.log(newBounds);
 
 		this.setState({ gmap : gmap });
 	},
@@ -43,7 +46,7 @@ var Map = React.createClass({
 			});
 		}
 	},
-	// get current bounds of map
+	// set current bounds of map
 	set_bounds: function() {
 		var map = this.state.gmap;
 		this.setState({ bounds: {
@@ -63,7 +66,6 @@ var Map = React.createClass({
 	},
 	componentDidMount: function (rootNode) {
 		this.loadMapOnMount();
-		// this.get_bounds();
 	},
 	render: function () {
 		this.loadMarkers();
