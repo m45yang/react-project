@@ -18,15 +18,9 @@
         "lng": "2.543"
     },
     {
-        "name": "Tony Stark",
-        "desc": "Told the world that he is Ironman",
-        "lat": "49.000001",
-        "lng": "2.101"
-    },
-    {
-        "name": "Batman",
-        "desc": "He's the Batman",
-        "lat": "49.5123",
-        "lng": "1.999999"
+        "name": "Regan Johnson",
+        "desc": "The boss.",
+        "lat": "48",
+        "lng": "2.1"
     }
 ]

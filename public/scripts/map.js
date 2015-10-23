@@ -1,42 +1,43 @@
+var reference = {};
+
 var Map = React.createClass({  
 	// create instance of google maps
-	loadMapOnMount: function() {
-		var mapOptions = {
-		    center: new google.maps.LatLng( this.props.lat , this.props.lng ),
-		    zoom: 8,
-		    streetViewControl: false
-		};
-		var gmap = new google.maps.Map( document.getElementById('map'), mapOptions );
-
-		// get the current bounds of the map after tiles loaded
-		google.maps.event.addListenerOnce(gmap, 'bounds_changed', this.init());
-
+	loadMapOnMount: function(rootNode) {
+		var gmap = new GMaps ({
+			div: '#map',
+			lat: this.props.lat,
+			lng: this.props.lng,
+			zoom: 8
+		});
+		
 		this.setState({ gmap : gmap });
 	},
 	// load markers every time state of app is changed
 	loadMarkers: function() {
-		// clear old markers
-		for (var i=0; i<this.state.markers.length; i++) {
-			this.state.markers[i].setMap(null);
-		}
-		markers = [];
+		if (this.state.gmap != 0) {
+			var gmap = this.state.gmap;
 
-		// grab new props passed from app
-		var newData = this.props.data;
+			//clear old markers
+			gmap.removeMarkers();
 
-		// create new markers with new props
-		for (var i=0; i<newData.length; i++) {
-			console.log('adding marker: ' + newData[i].lat + ' ' + newData[i].lng);
-			this.state.markers[i] = new google.maps.Marker({
-				map: this.state.gmap,
-			    position: new google.maps.LatLng(newData[i].lat, newData[i].lng),
-			    title: newData[i].name
-			});
+			// grab new props
+			var data = this.props.data;
+			for (var i=0; i<data.length; i++) {
+				console.log('adding marker: ' + data[i].lat + ' ' + data[i].lng);
+				gmap.addMarker ({
+					lat: data[i].lat,
+					lng: data[i].lng,
+					infoWindow: {
+						content: '<p>'+ data[i].name+'</p>'+
+								 '<p>'+ data[i].desc+'</p>'
+					}
+				});
+			}
 		}
 	},
-	// init map and map boundaries
-	init: function(gmap) {
-		console.log(gmap.getBounds());
+	//init map and map boundaries
+	init: function() {
+		gmap = this.state.gmap;
 		this.setState({ bounds: {
 			sw_lat : gmap.getBounds().getSouthWest().lat(),
 			sw_lng : gmap.getBounds().getSouthWest().lng(),
@@ -47,12 +48,12 @@ var Map = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			gmap: [],
-			markers: [],
+			gmap: 0,
 			bounds: []
 		};
 	},
 	componentDidMount: function (rootNode) {
+		reference = this.state.gmap;
 		this.loadMapOnMount();
 	},
 	render: function () {

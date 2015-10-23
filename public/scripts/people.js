@@ -16,7 +16,7 @@ var People = React.createClass({
 	render: function() {
 		var personList = this.props.data.map(function (person) {
 			return (
-				<Person key={ person.id } name={ person.name } desc={ person.desc } lat={ person.lat } lng={ person.lng }/>
+				<Person key={ person.name } name={ person.name } desc={ person.desc } lat={ person.lat } lng={ person.lng }/>
 			)
 		});
 		return (
