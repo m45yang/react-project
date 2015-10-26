@@ -7,22 +7,17 @@ var App = React.createClass({
 		return false;
 	},
 
-	loadPeopleFromServer: function() {
-		$.ajax({
-			url: this.props.url,
-			dataType: 'json',
-			cache: false,
-			success: function(data) {
-				var idList = [];
-				for (var i=0; i<data.length; i++) {
-					idList.push(data[i].id);
-				}
-				this.setState({ data: data, idList : idList });
-			}.bind(this),
-			error: function(xhr, status, err) {
-				console.error(this.props.url, status, err.toString());
-			}.bind(this)
-		});
+	updateDisplayData: function(bounds, data) {
+		var newData = [];
+		var newIDList = [];
+		for (var i=0; i<data.length; i++) {
+			if (self.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
+				newData.push(data[i]);
+				newIDList.push(data[i].id);
+			}
+		}
+		// reset data to contain only people within bounds
+		this.setState({ data : newData, idList : newIDList, bounds : bounds });
 	},
 
 	getInitialState: function () {
@@ -34,22 +29,20 @@ var App = React.createClass({
 			},
 			timeInterval: 2000,
 			data: [],
-			idList: []
+			idList: [],
+			bounds: []
 		}
 	},
 
-	componentDidMount: function() {
-		// this.loadPeopleFromServer();
-	},
-
 	handlePersonSubmit: function(person) {
+		var self = this;
 		$.ajax({
 			url: this.props.url,
 			dataType: 'json',
 			type: 'POST',
 			data: person,
 			success: function(data) {
-				this.setState({data: data});
+				self.updateDisplayData(bounds, data);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -57,23 +50,14 @@ var App = React.createClass({
 		});
 	},
 
-	handleBoundChange: function(bounds) {
+	loadPeopleFromServer: function(bounds) {
 		var self = this;
 		$.ajax({
 			url: this.props.url,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
-				var newData = [];
-				var newIDList = [];
-				for (var i=0; i<data.length; i++) {
-					if (self.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
-						newData.push(data[i]);
-						newIDList.push(data[i].id);
-					}
-				}
-				// reset data to contain only people within bounds
-				this.setState({ data : newData, idList : newIDList });
+				self.updateDisplayData(bounds, data);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -90,7 +74,7 @@ var App = React.createClass({
 						<InputForm onPersonSubmit={ this.handlePersonSubmit } />
 					</div>
 					<div className="col-lg-9">
-						<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.handleBoundChange } />
+						<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.loadPeopleFromServer } />
 					</div>
 				</div>
 			</div>
