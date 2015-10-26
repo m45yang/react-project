@@ -1,20 +1,25 @@
-var reference = {};
+var Map = React.createClass({
 
-var Map = React.createClass({  
 	// create instance of google maps
 	loadMapOnMount: function(rootNode) {
+		var self = this;
 		var gmap = new GMaps ({
 			div: '#map',
 			lat: this.props.lat,
 			lng: this.props.lng,
 			zoom: 8
 		});
+
+		gmap.addListener('dragend', function() {
+			self.setBounds();
+		})
 		
 		this.setState({ gmap : gmap });
 	},
+
 	// load markers every time state of app is changed
 	loadMarkers: function() {
-		if (this.state.gmap != 0) {
+		if (this.state.gmap) {
 			var gmap = this.state.gmap;
 
 			//clear old markers
@@ -23,7 +28,6 @@ var Map = React.createClass({
 			// grab new props
 			var data = this.props.data;
 			for (var i=0; i<data.length; i++) {
-				console.log('adding marker: ' + data[i].lat + ' ' + data[i].lng);
 				gmap.addMarker ({
 					lat: data[i].lat,
 					lng: data[i].lng,
@@ -35,8 +39,9 @@ var Map = React.createClass({
 			}
 		}
 	},
-	//init map and map boundaries
-	init: function() {
+
+	// set map boundaries
+	setBounds: function() {
 		gmap = this.state.gmap;
 		this.setState({ bounds: {
 			sw_lat : gmap.getBounds().getSouthWest().lat(),
@@ -44,18 +49,22 @@ var Map = React.createClass({
 			ne_lat : gmap.getBounds().getNorthEast().lat(),
 			ne_lng : gmap.getBounds().getNorthEast().lng()
 		}});
-		console.log(this.bounds);
+		
+		this.props.handleBoundChange(this.state.bounds);
+		console.log(this.state.bounds);
 	},
+
 	getInitialState: function() {
 		return {
-			gmap: 0,
+			gmap: null,
 			bounds: []
 		};
 	},
+
 	componentDidMount: function (rootNode) {
-		reference = this.state.gmap;
 		this.loadMapOnMount();
 	},
+
 	render: function () {
 		this.loadMarkers();
 		return (

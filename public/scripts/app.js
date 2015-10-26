@@ -1,4 +1,13 @@
 var App = React.createClass({
+
+	checkBounds: function(person, sw_lat, sw_lng, ne_lat, ne_lng) {
+		if (person.lat <= ne_lat && person.lat > sw_lat && person.lng < ne_lng && person.lng > sw_lng) {
+			return true;
+		}
+
+		return false;
+	},
+
 	loadPeopleFromServer: function() {
 		$.ajax({
 			url: this.props.url,
@@ -12,6 +21,7 @@ var App = React.createClass({
 			}.bind(this)
 		});
 	},
+
 	getInitialState: function () {
 		return {
 			mapCoords: {
@@ -23,10 +33,12 @@ var App = React.createClass({
 			data: []
 		}
 	},
+
 	componentDidMount: function() {
 		this.loadPeopleFromServer();
 		// setInterval(this.loadPeopleFromServer, this.state.timeInterval);
 	},
+
 	handlePersonSubmit: function(person) {
 		$.ajax({
 			url: this.props.url,
@@ -41,6 +53,31 @@ var App = React.createClass({
 			}.bind(this)
 		});
 	},
+
+	handleBoundChange: function(bounds) {
+		var self = this;
+		$.ajax({
+			url: this.props.url,
+			dataType: 'json',
+			cache: false,
+			success: function(data) {
+				console.log(data);
+				var newData = [];
+				for (var i=0; i<data.length; i++) {
+					console.log(data[i]);
+					if (self.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
+						newData.push(data[i]);
+					}
+				}
+
+				this.setState({ data : newData });
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
+
 	render: function () {
 		return (
 			<div className="app">
@@ -50,7 +87,7 @@ var App = React.createClass({
 						<InputForm onPersonSubmit={ this.handlePersonSubmit } />
 					</div>
 					<div className="col-lg-9">
-						<Map data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng }/>
+						<Map data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.handleBoundChange }/>
 					</div>
 				</div>
 			</div>
