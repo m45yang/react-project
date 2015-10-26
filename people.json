@@ -33,5 +33,12 @@
         "desc": "awd",
         "lat": "12",
         "lng": "44"
+    },
+    {
+        "id": "5",
+        "name": "Sally Johnson",
+        "desc": "I have no idea who she is",
+        "lat": "12",
+        "lng": "2.4"
     }
 ]

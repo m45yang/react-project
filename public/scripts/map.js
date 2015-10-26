@@ -10,11 +10,12 @@ var Map = React.createClass({
 			zoom: 8
 		});
 
-		gmap.addListener('dragend', function() {
+		gmap.addListener('idle', function() {
 			self.setBounds();
 		});
 
-		gmap.addListener('zoom_changed', function() {
+		gmap.addListener('tilesloaded', function() {
+			self.setState({ gmap : gmap });
 			self.setBounds();
 		});
 		

@@ -39,7 +39,7 @@ var App = React.createClass({
 	},
 
 	componentDidMount: function() {
-		this.loadPeopleFromServer();
+		// this.loadPeopleFromServer();
 	},
 
 	handlePersonSubmit: function(person) {
@@ -90,7 +90,7 @@ var App = React.createClass({
 						<InputForm onPersonSubmit={ this.handlePersonSubmit } />
 					</div>
 					<div className="col-lg-9">
-						<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.handleBoundChange }/>
+						<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.handleBoundChange } />
 					</div>
 				</div>
 			</div>
