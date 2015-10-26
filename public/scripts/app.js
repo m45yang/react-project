@@ -11,7 +11,7 @@ var App = React.createClass({
 		var newData = [];
 		var newIDList = [];
 		for (var i=0; i<data.length; i++) {
-			if (self.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
+			if (this.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
 				newData.push(data[i]);
 				newIDList.push(data[i].id);
 			}
