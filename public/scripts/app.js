@@ -61,15 +61,13 @@ var App = React.createClass({
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
-				console.log(data);
 				var newData = [];
 				for (var i=0; i<data.length; i++) {
-					console.log(data[i]);
 					if (self.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
 						newData.push(data[i]);
 					}
 				}
-
+				// reset data to contain only people within bounds
 				this.setState({ data : newData });
 			}.bind(this),
 			error: function(xhr, status, err) {

@@ -10,7 +10,7 @@ var Map = React.createClass({
 			zoom: 8
 		});
 
-		gmap.addListener('dragend', function() {
+		gmap.addListener('bounds_changed', function() {
 			self.setBounds();
 		})
 		
@@ -51,7 +51,6 @@ var Map = React.createClass({
 		}});
 		
 		this.props.handleBoundChange(this.state.bounds);
-		console.log(this.state.bounds);
 	},
 
 	getInitialState: function() {
@@ -66,6 +65,7 @@ var Map = React.createClass({
 	},
 
 	render: function () {
+		// putting loadmarkers here is very hacky, need to refactor
 		this.loadMarkers();
 		return (
 			<div className='google-map'>
