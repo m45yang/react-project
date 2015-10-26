@@ -4,7 +4,6 @@ var App = React.createClass({
 		if (person.lat <= ne_lat && person.lat > sw_lat && person.lng < ne_lng && person.lng > sw_lng) {
 			return true;
 		}
-
 		return false;
 	},
 
@@ -14,7 +13,11 @@ var App = React.createClass({
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
-				this.setState({ data: data });
+				var idList = [];
+				for (var i=0; i<data.length; i++) {
+					idList.push(data[i].id);
+				}
+				this.setState({ data: data, idList : idList });
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -30,13 +33,13 @@ var App = React.createClass({
 				lng: 2.3522219
 			},
 			timeInterval: 2000,
-			data: []
+			data: [],
+			idList: []
 		}
 	},
 
 	componentDidMount: function() {
 		this.loadPeopleFromServer();
-		// setInterval(this.loadPeopleFromServer, this.state.timeInterval);
 	},
 
 	handlePersonSubmit: function(person) {
@@ -62,13 +65,15 @@ var App = React.createClass({
 			cache: false,
 			success: function(data) {
 				var newData = [];
+				var newIDList = [];
 				for (var i=0; i<data.length; i++) {
 					if (self.checkBounds(data[i], bounds.sw_lat, bounds.sw_lng, bounds.ne_lat, bounds.ne_lng)) {
 						newData.push(data[i]);
+						newIDList.push(data[i].id);
 					}
 				}
 				// reset data to contain only people within bounds
-				this.setState({ data : newData });
+				this.setState({ data : newData, idList : newIDList });
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -85,7 +90,7 @@ var App = React.createClass({
 						<InputForm onPersonSubmit={ this.handlePersonSubmit } />
 					</div>
 					<div className="col-lg-9">
-						<Map data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.handleBoundChange }/>
+						<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.handleBoundChange }/>
 					</div>
 				</div>
 			</div>

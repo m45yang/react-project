@@ -10,9 +10,13 @@ var Map = React.createClass({
 			zoom: 8
 		});
 
-		gmap.addListener('bounds_changed', function() {
+		gmap.addListener('dragend', function() {
 			self.setBounds();
-		})
+		});
+
+		gmap.addListener('zoom_changed', function() {
+			self.setBounds();
+		});
 		
 		this.setState({ gmap : gmap });
 	},
@@ -60,8 +64,16 @@ var Map = React.createClass({
 		};
 	},
 
-	componentDidMount: function (rootNode) {
+	componentDidMount: function(rootNode) {
 		this.loadMapOnMount();
+	},
+
+	shouldComponentUpdate : function(nextProps, nextState) {
+		console.log('check');
+		console.log(nextProps.idList);
+		console.log(this.props.idList);
+		console.log(nextProps.idList !== this.props.idList);
+		return nextProps.idList !== this.props.idList;
 	},
 
 	render: function () {
