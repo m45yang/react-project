@@ -19,15 +19,15 @@ var Map = React.createClass({
 	},
 
 	// load markers every time state of app is changed
-	loadMarkers: function() {
+	loadMarkers: function(data) {
 		if (this.state.gmap) {
 			var gmap = this.state.gmap;
 
-			//clear old markers
+			// clear old markers
+			console.log('remove markers');
 			gmap.removeMarkers();
 
-			// grab new props
-			var data = this.props.data;
+			console.log('adding new markers');
 			for (var i=0; i<data.length; i++) {
 				gmap.addMarker ({
 					lat: data[i].lat,
@@ -69,9 +69,11 @@ var Map = React.createClass({
 		return !nextProps.idList.equals(this.props.idList);
 	},
 
+	componentWillUpdate : function(nextProps, nextState) {
+		this.loadMarkers(nextProps.data);
+	},
+
 	render: function () {
-		// putting loadmarkers here is very hacky, need to refactor
-		this.loadMarkers();
 		return (
 			<div className='google-map'>
 				<div id="map"></div>
