@@ -1,3 +1,28 @@
+Array.prototype.equals = function (array, strict) {
+    if (!array)
+        return false;
+
+    if (arguments.length == 1)
+        strict = true;
+
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            if (!this[i].equals(array[i], strict))
+                return false;
+        }
+        else if (strict && this[i] != array[i]) {
+            return false;
+        }
+        else if (!strict) {
+            return this.sort().equals(array.sort(), true);
+        }
+    }
+    return true;
+}
+
 var App = React.createClass({
 
 	checkBounds: function(person, sw_lat, sw_lng, ne_lat, ne_lng) {
@@ -42,7 +67,7 @@ var App = React.createClass({
 			type: 'POST',
 			data: person,
 			success: function(data) {
-				self.updateDisplayData(bounds, data);
+				self.updateDisplayData(this.state.bounds, data);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -55,7 +80,6 @@ var App = React.createClass({
 		$.ajax({
 			url: this.props.url,
 			dataType: 'json',
-			cache: false,
 			success: function(data) {
 				self.updateDisplayData(bounds, data);
 			}.bind(this),

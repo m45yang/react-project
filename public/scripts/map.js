@@ -2,7 +2,6 @@ var Map = React.createClass({
 
 	// create instance of google maps
 	loadMapOnMount: function(rootNode) {
-		var self = this;
 		var gmap = new GMaps ({
 			div: '#map',
 			lat: this.props.lat,
@@ -10,16 +9,13 @@ var Map = React.createClass({
 			zoom: 8
 		});
 
-		gmap.addListener('idle', function() {
-			self.setBounds();
-		});
-
-		gmap.addListener('tilesloaded', function() {
-			self.setState({ gmap : gmap });
-			self.setBounds();
-		});
-		
 		this.setState({ gmap : gmap });
+
+		gmap.addListener('idle', function() {
+			if (this.state.gmap !== null) {
+				this.setBounds();
+			}
+		}.bind(this));
 	},
 
 	// load markers every time state of app is changed
@@ -48,20 +44,19 @@ var Map = React.createClass({
 	// set map boundaries
 	setBounds: function() {
 		gmap = this.state.gmap;
-		this.setState({ bounds: {
+		var bounds = {
 			sw_lat : gmap.getBounds().getSouthWest().lat(),
 			sw_lng : gmap.getBounds().getSouthWest().lng(),
 			ne_lat : gmap.getBounds().getNorthEast().lat(),
 			ne_lng : gmap.getBounds().getNorthEast().lng()
-		}});
+		};
 		
-		this.props.handleBoundChange(this.state.bounds);
+		this.props.handleBoundChange(bounds);
 	},
 
 	getInitialState: function() {
 		return {
 			gmap: null,
-			bounds: []
 		};
 	},
 
@@ -70,11 +65,8 @@ var Map = React.createClass({
 	},
 
 	shouldComponentUpdate : function(nextProps, nextState) {
-		console.log('check');
-		console.log(nextProps.idList);
-		console.log(this.props.idList);
-		console.log(nextProps.idList !== this.props.idList);
-		return nextProps.idList !== this.props.idList;
+		// only re-render map if there are new search results
+		return !nextProps.idList.equals(this.props.idList);
 	},
 
 	render: function () {
