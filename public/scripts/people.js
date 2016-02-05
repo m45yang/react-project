@@ -2,12 +2,14 @@ var Person = React.createClass({
 	render: function () {
 		return (
 			<div className="person">
-				<div className="panel panel-default">
+				<div className="panel panel-warning">
 					<div className="panel-heading">
 						<a href="#">{ this.props.name }</a>
 					</div>
+					<div className="panel-body">
+						<p>{ this.props.desc }</p>
+					</div>
 				</div>
-				<p>{ this.props.desc }</p>
 			</div>
 		)
 	}
