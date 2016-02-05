@@ -15,16 +15,50 @@ var InputForm = React.createClass({
 		React.findDOMNode(this.refs.lat).value = '';
 		React.findDOMNode(this.refs.lng).value = '';
 	},
+	
 	render: function() {
 		return (
-			<form className="inputForm" onSubmit={ this.handleSubmit }>
-				<input type="text" placeholder="id" ref="id" />
-				<input type="text" placeholder="Name" ref="name" />
-				<input type="text" placeholder="Description" ref="desc" />
-				<input type="text" placeholder="Latitude" ref="lat" />
-				<input type="text" placeholder="Longtitude" ref="lng" />
-				<input type="submit" value="Submit!" />
-			</form>
+			<div id="addPersonModal" className="modal fade" role="dialog">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<button type="button" className="close" data-dismiss="modal">&times;</button>
+							<h4 className="modal-title">Add a person</h4>
+						</div>
+						<div className="modal-body">
+							<form className="inputForm" onSubmit={ this.handleSubmit }>
+								<div className="form-group">
+									<label for="id">Id</label>
+									<input type="text" className="form-control" id="id" ref="id" />
+								</div>
+								<div className="form-group">
+									<label for="name">Name</label>
+									<input type="text" className="form-control" id="name" ref="name" />
+								</div>
+								<div className="form-group">
+									<label for="desc">Description</label>
+									<input type="text" className="form-control" id="desc" ref="desc" />
+								</div>
+								<div className="form-group">
+									<label for="lat">Latitude</label>
+									<input type="text" className="form-control" id="lat" ref="lat" />
+								</div>
+								<div className="form-group">
+									<label for="lng">Longitude</label>
+									<input type="text" className="form-control" id="lng" ref="lng" />
+								</div>
+								<div className="form-group">
+									<input type="submit" value="Submit!" />
+								</div>
+							</form>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		)
 	}
 })

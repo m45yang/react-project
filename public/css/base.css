@@ -1,70 +1,48 @@
-body {
-  background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  margin: 0;
-  padding: 30px;
+html,body{
+  height:100%;
 }
 
-a {
-  color: #4183c4;
-  text-decoration: none;
+body{
+  padding-top:50px; /*padding for navbar*/
 }
 
-a:hover {
-  text-decoration: underline;
+.navbar-custom .icon-bar {
+  background-color:#fff;
 }
 
-code {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
-  font-size: 12px;
-  margin: 0 2px;
-  padding: 0px 5px;
+.navbar-custom {
+  background-color: #CD5C5C;
 }
 
-h1, h2, h3, h4 {
-  font-weight: bold;
-  margin: 0 0 15px;
-  padding: 0;
+.navbar-custom a{
+  color:#000;
 }
 
-h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin: 0 0 15px;
-  padding: 0;
-}
-
-h2 {
-  font-size: 2em;
-}
-
-h3 {
-  font-size: 1.5em;
-}
-
-h4 {
-  font-size: 1.2em;
-}
-
-p, ul {
-  margin: 15px 0;
-}
-
-ul {
-  padding-left: 30px;
-}
-
-.google-map {
-  width: 100%;
-  height: 600px;
+.navbar-custom .form-control:focus {
+  border-color: #49bfff;
+  outline: 0;
+  -webkit-box-shadow: inset 0 0 0;
+  box-shadow: inset 0 0 0;
 }
 
 #map {
-  width: 100%;
+  width: 33.3333%;
+  height: calc(100% - 0);
+  position: absolute;
+  right: 16px;
+  top: 50px;
+  bottom: 0;
+  overflow: hidden;
+}
+
+#main, #main>.row {
   height: 100%;
+}
+
+#main>.row {
+    overflow-y:scroll;
+}
+
+#left {
+  height:100%;
 }

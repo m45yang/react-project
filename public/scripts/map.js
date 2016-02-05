@@ -1,11 +1,18 @@
 var Map = React.createClass({
 
+	getInitialState: function() {
+		return {
+			gmap: null,
+		};
+	},
+
 	// create instance of google maps
 	loadMapOnMount: function(rootNode) {
 		var gmap = new GMaps ({
 			div: '#map',
 			lat: this.props.lat,
 			lng: this.props.lng,
+			scrollWheel: false,
 			zoom: 8
 		});
 
@@ -54,12 +61,6 @@ var Map = React.createClass({
 		this.props.handleBoundChange(bounds);
 	},
 
-	getInitialState: function() {
-		return {
-			gmap: null,
-		};
-	},
-
 	componentDidMount: function(rootNode) {
 		this.loadMapOnMount();
 	},
@@ -75,9 +76,7 @@ var Map = React.createClass({
 
 	render: function () {
 		return (
-			<div className='google-map'>
-				<div id="map"></div>
-			</div>
+			<div id="map"></div>
 		);
 	}
 });

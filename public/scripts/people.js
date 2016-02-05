@@ -2,11 +2,12 @@ var Person = React.createClass({
 	render: function () {
 		return (
 			<div className="person">
-				<h2>{ this.props.name }</h2>
+				<div className="panel panel-default">
+					<div className="panel-heading">
+						<a href="#">{ this.props.name }</a>
+					</div>
+				</div>
 				<p>{ this.props.desc }</p>
-				<p>Latitude: { this.props.lat }</p>
-				<p>Longtitude: { this.props.lng }</p>
-				<hr/>
 			</div>
 		)
 	}

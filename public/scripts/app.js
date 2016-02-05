@@ -25,6 +25,20 @@ Array.prototype.equals = function (array, strict) {
 
 var App = React.createClass({
 
+	getInitialState: function () {
+		return {
+			mapCoords: {
+				// I suppose Paris is a good default location
+				lat: 48.856614,
+				lng: 2.3522219
+			},
+			timeInterval: 2000,
+			data: [],
+			idList: [],
+			bounds: []
+		}
+	},
+
 	checkBounds: function(person, sw_lat, sw_lng, ne_lat, ne_lng) {
 		if (person.lat <= ne_lat && person.lat > sw_lat && person.lng < ne_lng && person.lng > sw_lng) {
 			return true;
@@ -43,20 +57,6 @@ var App = React.createClass({
 		}
 		// reset data to contain only people within bounds
 		this.setState({ data : newData, idList : newIDList, bounds : bounds });
-	},
-
-	getInitialState: function () {
-		return {
-			mapCoords: {
-				// I suppose Paris is a good default location
-				lat: 48.856614,
-				lng: 2.3522219
-			},
-			timeInterval: 2000,
-			data: [],
-			idList: [],
-			bounds: []
-		}
 	},
 
 	handlePersonSubmit: function(person) {
@@ -91,15 +91,14 @@ var App = React.createClass({
 
 	render: function () {
 		return (
-			<div className="app">
-				<div className="row">
-					<div className="col-lg-3">
-						<People data={ this.state.data } />
-						<InputForm onPersonSubmit={ this.handlePersonSubmit } />
-					</div>
-					<div className="col-lg-9">
-						<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.loadPeopleFromServer } />
-					</div>
+			<div className="row">
+				<Map idList={ this.state.idList } data={ this.state.data } lat={ this.state.mapCoords.lat } lng={ this.state.mapCoords.lng } handleBoundChange={ this.loadPeopleFromServer } />
+				<div className="col-xs-8" id="left">
+					<h2>Dynamic map search using ReactJS</h2>
+					<People data={ this.state.data } />
+					<InputForm onPersonSubmit={ this.handlePersonSubmit } />
+				</div>
+				<div className="col-xs-4">
 				</div>
 			</div>
 		);

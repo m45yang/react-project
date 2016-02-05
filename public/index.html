@@ -11,11 +11,46 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<div id="main"></div>
+		<div class="navbar navbar-custom navbar-fixed-top">
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>&nbsp;</li>
+					<li>
+						<p class="navbar-btn">
+							<a href="#" class="btn btn-default" data-toggle="modal" data-target="#addPersonModal">Add a person</a>
+						</p>
+					</li>
+					<li>&nbsp;</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					
+				</ul>
+				<form class="navbar-form">
+					<div class="form-group" style="display:inline;">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Category 1</a></li>
+									<li><a href="#">Category 2</a></li>
+									<li><a href="#">Category 3</a></li>
+									<li><a href="#">Category 4</a></li>
+									<li><a href="#">Category 5</a></li> 
+								</ul>
+							</div>
+							<input type="text" class="form-control" placeholder="What are searching for?">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
+
+		<div class="container-fluid" id ="main"></0div>
+
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
 		<script type="text/jsx;harmony=true" src="gmaps/gmaps.js"></script>
 		<script type="text/jsx;harmony=true" src="scripts/form.js"></script>
 		<script type="text/jsx;harmony=true" src="scripts/people.js"></script>
