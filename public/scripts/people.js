@@ -29,3 +29,5 @@ var People = React.createClass({
 		)
 	},
 });
+
+module.exports = People

@@ -4,12 +4,20 @@
   "description": "Code from the React tutorial.",
   "main": "server.js",
   "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.2",
+    "babel-preset-react": "^6.3.13",
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
     "gmaps": "^0.4.20",
-    "google-map-react": "^0.5.6"
+    "google-map-react": "^0.5.6",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

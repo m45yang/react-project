@@ -23,6 +23,11 @@ Array.prototype.equals = function (array, strict) {
     return true;
 }
 
+require('../css/base.css')
+var Map = require('./map');
+var InputForm = require('./form');
+var People = require('./people');
+
 var App = React.createClass({
 
 	getInitialState: function () {

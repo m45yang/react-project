@@ -28,23 +28,23 @@ var InputForm = React.createClass({
 						<div className="modal-body">
 							<form className="inputForm" onSubmit={ this.handleSubmit }>
 								<div className="form-group">
-									<label for="id">Id</label>
+									<label htmlFor="id">Id</label>
 									<input type="text" className="form-control" id="id" ref="id" />
 								</div>
 								<div className="form-group">
-									<label for="name">Name</label>
+									<label htmlFor="name">Name</label>
 									<input type="text" className="form-control" id="name" ref="name" />
 								</div>
 								<div className="form-group">
-									<label for="desc">Description</label>
+									<label htmlFor="desc">Description</label>
 									<input type="text" className="form-control" id="desc" ref="desc" />
 								</div>
 								<div className="form-group">
-									<label for="lat">Latitude</label>
+									<label htmlFor="lat">Latitude</label>
 									<input type="text" className="form-control" id="lat" ref="lat" />
 								</div>
 								<div className="form-group">
-									<label for="lng">Longitude</label>
+									<label htmlFor="lng">Longitude</label>
 									<input type="text" className="form-control" id="lng" ref="lng" />
 								</div>
 								<div className="form-group">
@@ -62,3 +62,5 @@ var InputForm = React.createClass({
 		)
 	}
 })
+
+module.exports = InputForm

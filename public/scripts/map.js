@@ -80,3 +80,5 @@ var Map = React.createClass({
 		);
 	}
 });
+
+module.exports = Map;
