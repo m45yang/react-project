@@ -44,29 +44,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	Array.prototype.equals = function (array, strict) {
-		if (!array) return false;
-
-		if (arguments.length == 1) strict = true;
-
-		if (this.length != array.length) return false;
-
-		for (var i = 0; i < this.length; i++) {
-			if (this[i] instanceof Array && array[i] instanceof Array) {
-				if (!this[i].equals(array[i], strict)) return false;
-			} else if (strict && this[i] != array[i]) {
-				return false;
-			} else if (!strict) {
-				return this.sort().equals(array.sort(), true);
-			}
-		}
-		return true;
-	};
-
 	__webpack_require__(1);
-	var Map = __webpack_require__(5);
-	var InputForm = __webpack_require__(6);
-	var People = __webpack_require__(7);
+	__webpack_require__(5);
+	var Map = __webpack_require__(6);
+	var InputForm = __webpack_require__(7);
+	var People = __webpack_require__(8);
 
 	var App = React.createClass({
 		displayName: 'App',
@@ -512,6 +494,29 @@
 /* 5 */
 /***/ function(module, exports) {
 
+	Array.prototype.equals = function (array, strict) {
+	    if (!array) return false;
+
+	    if (arguments.length == 1) strict = true;
+
+	    if (this.length != array.length) return false;
+
+	    for (var i = 0; i < this.length; i++) {
+	        if (this[i] instanceof Array && array[i] instanceof Array) {
+	            if (!this[i].equals(array[i], strict)) return false;
+	        } else if (strict && this[i] != array[i]) {
+	            return false;
+	        } else if (!strict) {
+	            return this.sort().equals(array.sort(), true);
+	        }
+	    }
+	    return true;
+	};
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
 	var Map = React.createClass({
 		displayName: 'Map',
 
@@ -596,7 +601,7 @@
 	module.exports = Map;
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	var InputForm = React.createClass({
@@ -724,7 +729,7 @@
 	module.exports = InputForm;
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	var Person = React.createClass({
