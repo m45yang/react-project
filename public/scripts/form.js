@@ -1,3 +1,5 @@
+var React = require('react');
+
 var InputForm = React.createClass({
 	handleSubmit: function(e) {
 		e.preventDefault();

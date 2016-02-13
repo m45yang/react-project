@@ -1,7 +1,6 @@
 {
-  "name": "react-tutorial",
+  "name": "yelp-hackathon",
   "version": "0.0.0",
-  "description": "Code from the React tutorial.",
   "main": "server.js",
   "dependencies": {
     "babel-core": "^6.4.5",
@@ -10,7 +9,6 @@
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
     "gmaps": "^0.4.20",
-    "google-map-react": "^0.5.6",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   },
