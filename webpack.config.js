@@ -1,6 +1,7 @@
+var webpack = require('webpack');
 var path = require('path');
 
-module.exports = {
+var config = {
     entry: path.resolve(__dirname, 'public/scripts/app.js'),
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -11,7 +12,7 @@ module.exports = {
         {
             test: /\.jsx?$/,
             exclude: /(node_modules|bower_components)/,
-            loader: 'babel?presets[]=react'
+            loader: 'babel'
         },
         {
             test: /\.css$/, 
@@ -20,3 +21,5 @@ module.exports = {
     ]
     }
 };
+
+module.exports = config;

@@ -44,6 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	__webpack_require__(1);
 	__webpack_require__(5);
 	var Map = __webpack_require__(6);
@@ -57,7 +59,7 @@
 		displayName: 'App',
 
 
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				mapCoords: {
 					// I suppose Paris is a good default location
@@ -71,14 +73,14 @@
 			};
 		},
 
-		checkBounds: function (person, sw_lat, sw_lng, ne_lat, ne_lng) {
+		checkBounds: function checkBounds(person, sw_lat, sw_lng, ne_lat, ne_lng) {
 			if (person.lat <= ne_lat && person.lat > sw_lat && person.lng < ne_lng && person.lng > sw_lng) {
 				return true;
 			}
 			return false;
 		},
 
-		updateDisplayData: function (bounds, data) {
+		updateDisplayData: function updateDisplayData(bounds, data) {
 			var newData = [];
 			var newIDList = [];
 			for (var i = 0; i < data.length; i++) {
@@ -91,7 +93,7 @@
 			this.setState({ data: newData, idList: newIDList, bounds: bounds });
 		},
 
-		handlePersonSubmit: function (person) {
+		handlePersonSubmit: function handlePersonSubmit(person) {
 			var self = this;
 			$.ajax({
 				url: this.props.url,
@@ -107,7 +109,7 @@
 			});
 		},
 
-		loadPeopleFromServer: function (bounds) {
+		loadPeopleFromServer: function loadPeopleFromServer(bounds) {
 			var self = this;
 			$.ajax({
 				url: this.props.url,
@@ -121,7 +123,7 @@
 			});
 		},
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'row' },
@@ -498,6 +500,8 @@
 /* 5 */
 /***/ function(module, exports) {
 
+	"use strict";
+
 	Array.prototype.equals = function (array, strict) {
 	    if (!array) return false;
 
@@ -521,20 +525,22 @@
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	var React = __webpack_require__(7);
 
 	var Map = React.createClass({
 		displayName: 'Map',
 
 
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				gmap: null
 			};
 		},
 
 		// create instance of google maps
-		loadMapOnMount: function (rootNode) {
+		loadMapOnMount: function loadMapOnMount(rootNode) {
 			var gmap = new GMaps({
 				div: '#map',
 				lat: this.props.lat,
@@ -553,15 +559,13 @@
 		},
 
 		// load markers every time state of app is changed
-		loadMarkers: function (data) {
+		loadMarkers: function loadMarkers(data) {
 			if (this.state.gmap) {
 				var gmap = this.state.gmap;
 
 				// clear old markers
-				console.log('remove markers');
 				gmap.removeMarkers();
 
-				console.log('adding new markers');
 				for (var i = 0; i < data.length; i++) {
 					gmap.addMarker({
 						lat: data[i].lat,
@@ -575,8 +579,8 @@
 		},
 
 		// set map boundaries
-		setBounds: function () {
-			gmap = this.state.gmap;
+		setBounds: function setBounds() {
+			var gmap = this.state.gmap;
 			var bounds = {
 				sw_lat: gmap.getBounds().getSouthWest().lat(),
 				sw_lng: gmap.getBounds().getSouthWest().lng(),
@@ -587,20 +591,20 @@
 			this.props.handleBoundChange(bounds);
 		},
 
-		componentDidMount: function (rootNode) {
+		componentDidMount: function componentDidMount(rootNode) {
 			this.loadMapOnMount();
 		},
 
-		shouldComponentUpdate: function (nextProps, nextState) {
+		shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
 			// only re-render map if there are new search results
 			return !nextProps.idList.equals(this.props.idList);
 		},
 
-		componentWillUpdate: function (nextProps, nextState) {
+		componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
 			this.loadMarkers(nextProps.data);
 		},
 
-		render: function () {
+		render: function render() {
 			return React.createElement('div', { id: 'map' });
 		}
 	});
@@ -20203,12 +20207,14 @@
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	var React = __webpack_require__(7);
 
 	var InputForm = React.createClass({
 		displayName: 'InputForm',
 
-		handleSubmit: function (e) {
+		handleSubmit: function handleSubmit(e) {
 			e.preventDefault();
 			var id = React.findDOMNode(this.refs.id).value.trim();
 			var name = React.findDOMNode(this.refs.name).value.trim();
@@ -20225,7 +20231,7 @@
 			React.findDOMNode(this.refs.lng).value = '';
 		},
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ id: 'addPersonModal', className: 'modal fade', role: 'dialog' },
@@ -20333,12 +20339,14 @@
 /* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
 	var React = __webpack_require__(7);
 
 	var Person = React.createClass({
 		displayName: "Person",
 
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				"div",
 				{ className: "person" },
@@ -20371,7 +20379,7 @@
 	var People = React.createClass({
 		displayName: "People",
 
-		render: function () {
+		render: function render() {
 			var personList = this.props.data.map(function (person) {
 				return React.createElement(Person, { key: person.name, name: person.name, desc: person.desc, lat: person.lat, lng: person.lng });
 			});

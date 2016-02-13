@@ -33,10 +33,8 @@ var Map = React.createClass({
 			var gmap = this.state.gmap;
 
 			// clear old markers
-			console.log('remove markers');
 			gmap.removeMarkers();
 
-			console.log('adding new markers');
 			for (var i=0; i<data.length; i++) {
 				gmap.addMarker ({
 					lat: data[i].lat,
@@ -52,7 +50,7 @@ var Map = React.createClass({
 
 	// set map boundaries
 	setBounds: function() {
-		gmap = this.state.gmap;
+		var gmap = this.state.gmap;
 		var bounds = {
 			sw_lat : gmap.getBounds().getSouthWest().lat(),
 			sw_lng : gmap.getBounds().getSouthWest().lng(),
