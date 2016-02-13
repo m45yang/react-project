@@ -48,10 +48,10 @@
 
 	__webpack_require__(1);
 	__webpack_require__(5);
+
 	var Map = __webpack_require__(6);
 	var InputForm = __webpack_require__(164);
 	var People = __webpack_require__(165);
-
 	var React = __webpack_require__(7);
 	var ReactDOM = __webpack_require__(166);
 

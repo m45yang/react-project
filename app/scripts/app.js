@@ -1,9 +1,9 @@
-require('../css/base.css')
-require('./array_prototype')
+require('../css/base.css');
+require('./array_prototype');
+
 var Map = require('./map');
 var InputForm = require('./form');
 var People = require('./people');
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 
